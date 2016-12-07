@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 
 class ViewController: UIViewController, UITableViewDataSource , UITableViewDelegate, DetalleViewControllerDelegate, AgregarViewControllerDelegate{
     
-    var datos = [("Juan",45),("Juan1",40),("Juan2",25)]
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var lblImagen: UILabel!
+    var datos = [("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",49)]
     var indexDato = -1
     
     func numeroCambiado(numero: Int) {
@@ -35,6 +38,9 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imgView.image = UIImage (named: "dog" )
+        lblImagen.text = "The dog"
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -43,6 +49,23 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func btnRefresh(_ sender: UIBarButtonItem) {
+        let idfacebook = FBSDKAccessToken.current().userID
+        let url = URL(string: "http://graph.facebook.com/\(idfacebook!)/picture?type=large")
+        let dato : Data?
+        
+        do{
+            dato = try Data(contentsOf: url!)
+            imgView.image = UIImage(data: dato!)
+        }
+        catch{
+            print("error cargando imagen")
+            dato = nil
+            imgView.image = UIImage (named: "dog" )
+            
+        }
+        
+    }
     
     @IBAction func btnAdd(_ sender: UIBarButtonItem) {
         indexDato = -1
@@ -63,6 +86,24 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         let vista = tableView.dequeueReusableCell(withIdentifier: proto, for: indexPath) as! FilaTableViewCell
         vista.Izquierda.text = datos[indexPath.row].0
         vista.Derecha.text = "\(datos[indexPath.row].1)"
+        vista.imgView.image = UIImage (named: "dog" )
+        let idfacebook = FBSDKAccessToken.current().userID
+        let url =  "http://graph.facebook.com/\(idfacebook!)/picture?type=large"
+        
+        vista.imgView.LoadImageUrl(url: url)        
+        
+//        let dato : Data?
+//        
+//        do{
+//            dato = try Data(contentsOf: URL(string: url)!)
+//            vista.imgView.image = UIImage(data: dato!)
+//        }
+//        catch{
+//            print("error cargando imagen")
+//            dato = nil
+//            vista.imgView.image = UIImage (named: "dog" )
+//            
+//        }
         return vista
     }
     

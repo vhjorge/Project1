@@ -13,6 +13,6 @@ class FilaTableViewCell: UITableViewCell {
     
     @IBOutlet weak var Derecha: UILabel!
     @IBOutlet weak var Izquierda: UILabel!
+    @IBOutlet weak var imgView: UIImageView!
     
-    
-}
+    }
