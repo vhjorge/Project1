@@ -17,6 +17,9 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     var datos = [("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan1",40),("Juan2",25),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",45),("Juan",49)]
     var indexDato = -1
     
+    
+    var arreglo: [(nombre: String, edad: Int, genero: String, foto: String)] = []
+    
     func numeroCambiado(numero: Int) {
         print("Nùmero Cambiado: \(numero)")
         datos[numero].1 = datos[numero].1 + 1
@@ -26,12 +29,12 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     func agregarPersona(nombre: String, edad: Int, fila : Int) {
         if (fila == -1)
         {
-            datos.append((nombre,edad));
+            arreglo.append((nombre: nombre, edad: edad, genero: "", foto: ""))
         }
         else
         {
-            datos[fila].0 = nombre
-            datos[fila].1 = edad
+            arreglo[fila].nombre = nombre
+            arreglo[fila].edad = edad
         }
         tblDatos.reloadData()
     }
@@ -40,7 +43,7 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         super.viewDidLoad()
         imgView.image = UIImage (named: "dog" )
         lblImagen.text = "The dog"
-        
+        Sincronizar()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -74,7 +77,7 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return datos.count
+        return arreglo.count
     }
     
     
@@ -84,13 +87,21 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     {
         let proto = (indexPath.row % 2 == 0) ? "Proto1" : "Proto2"
         let vista = tableView.dequeueReusableCell(withIdentifier: proto, for: indexPath) as! FilaTableViewCell
-        vista.Izquierda.text = datos[indexPath.row].0
-        vista.Derecha.text = "\(datos[indexPath.row].1)"
-        vista.imgView.image = UIImage (named: "dog" )
-        let idfacebook = FBSDKAccessToken.current().userID
-        let url =  "http://graph.facebook.com/\(idfacebook!)/picture?type=large"
+        vista.Izquierda.text = arreglo[indexPath.row].nombre
+        vista.Derecha.text = "\(arreglo[indexPath.row].edad)"
+        //vista.imgView.image = UIImage (named: "dog" )
+       // let idfacebook = FBSDKAccessToken.current().userID
+        //let url =  "http://graph.facebook.com/\(idfacebook!)/picture?type=large"
         
-        vista.imgView.LoadImageUrl(url: url)        
+        if (arreglo[indexPath.row].genero == "m")
+        {
+            vista.imgView.image = UIImage (named: "female" )            
+        }
+        else
+        {
+            vista.imgView.image = UIImage (named: "male" )
+        }
+        vista.imgView.DownLoadData(url: arreglo[indexPath.row].foto)
         
 //        let dato : Data?
 //        
@@ -122,7 +133,7 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     }
     
     func borrarFila(sender : UITableViewRowAction, indexpath : IndexPath){
-        datos.remove(at: indexpath.row)
+        arreglo.remove(at: indexpath.row)
         tblDatos.reloadData()
         
     }
@@ -155,6 +166,75 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         }
     }
     
+    
+    // Día 4 Sincronizar
+    
+    func Sincronizar(){
+        
+        let url = URL(string: "http://kke.mx/demo/contactos.php")
+        
+//        var request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 1000)
+//        
+//        request.httpMethod = "GET"
+        
+        var request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 1000)
+        
+        request.httpMethod = "POST"
+        request.httpBody = Data(base64Encoded: "dato1=23&dato2=34")
+        //data?.base64EncodedString()
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
+            guard(error == nil) else{
+                print ("Ocurrio un error con la peticion: \(error)")
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                print ("Ocurrio un error en la respuesta: \(error)")
+                return
+            }
+            
+            if !(statusCode >= 200 && statusCode <= 299){
+                print ("Respuesta no valida")
+                return
+            }
+            
+            
+            let cad = String(data: data!, encoding: .utf8)
+            print ("Responde :\(response?.description)")
+            print ("error :\(error)")
+            print ("cad : \(cad!)")
+            
+            var parserResult: Any!
+            do {
+                parserResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+            }
+            catch{
+                parserResult = nil;
+                print("Error :\(error)");
+                return
+            }
+            
+            guard let jsondatos = (parserResult as? Dictionary<String,Any?>)?["datos"] as! [Dictionary<String, Any>]! else {
+                print("Error :\(error)");
+                return
+            }
+            self.arreglo.removeAll()
+            
+            for d in jsondatos{
+                let nombre = d["nombre"] as! String
+                let edad = d["edad"] as! Int
+                let genero = d["genero"] as! String
+                let foto = d["foto"] as! String
+                self.arreglo.append((nombre: nombre, edad: edad, genero: genero, foto: foto))
+            }
+            self.tblDatos.reloadData()
+        
+        })
+        task.resume()
+    }
     
 }
 

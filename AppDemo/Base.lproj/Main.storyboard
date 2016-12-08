@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="-1986" y="183"/>
         </scene>
-        <!--View Controller-->
+        <!--Inicio-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AppDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,14 +41,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="E5X-dc-CmA">
-                                <rect key="frame" x="8" y="188" width="304" height="372"/>
+                                <rect key="frame" x="8" y="218" width="304" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Proto1" rowHeight="35" id="AUc-p3-Coa" customClass="FilaTableViewCell" customModule="AppDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="304" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AUc-p3-Coa" id="amr-6c-orW">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="34"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Izq" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibi-Wv-wca">
@@ -81,7 +81,7 @@
                                         <rect key="frame" x="0.0" y="63" width="304" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j8R-4u-6Fz" id="8AI-r4-pP7">
-                                            <rect key="frame" x="0.0" y="0.0" width="304" height="34"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Der" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3C-ec-Dpp">
@@ -117,14 +117,14 @@
                                 </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GCd-4v-2hL">
-                                <rect key="frame" x="0.0" y="64" width="118" height="116"/>
+                                <rect key="frame" x="0.0" y="94" width="118" height="116"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GCd-4v-2hL" secondAttribute="height" multiplier="59:58" id="78L-Ua-DMV"/>
                                     <constraint firstAttribute="width" constant="118" id="H3C-R6-wSc"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKE-UD-J1s">
-                                <rect key="frame" x="126" y="64" width="176" height="116"/>
+                                <rect key="frame" x="126" y="94" width="176" height="116"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="176" id="e93-9D-mLD"/>
                                     <constraint firstAttribute="width" secondItem="aKE-UD-J1s" secondAttribute="height" multiplier="44:29" id="wr6-ho-14Z"/>
@@ -146,7 +146,8 @@
                             <constraint firstItem="E5X-dc-CmA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="f3V-Fq-jLu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="034-pZ-ek3">
+                    <navigationItem key="navigationItem" title="Inicio" prompt="IOS" id="034-pZ-ek3">
+                        <barButtonItem key="backBarButtonItem" title="Regresar" id="mMJ-rM-Lv3"/>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="GcU-uw-cWN">
                                 <connections>
