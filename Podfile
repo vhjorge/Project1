@@ -10,5 +10,7 @@ pod 'FacebookCore'
 pod 'FacebookLogin'
 pod 'FacebookShare'
 pod 'AFNetworking', '~> 3.0'
+pod 'Firebase/Core'
+pod 'Firebase/Database'
 
 end

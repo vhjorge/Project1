@@ -8,9 +8,12 @@
 
 import UIKit
 import FBSDKLoginKit
+import Firebase
 
 
 class ViewController: UIViewController, UITableViewDataSource , UITableViewDelegate, DetalleViewControllerDelegate, AgregarViewControllerDelegate{
+    
+    var context : FIRDatabaseReference?
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var lblImagen: UILabel!
@@ -41,6 +44,8 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        context = FIRDatabase.database().reference()
+        
         imgView.image = UIImage (named: "dog" )
         lblImagen.text = "The dog"
         Sincronizar()
@@ -67,6 +72,19 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
             imgView.image = UIImage (named: "dog" )
             
         }
+        //var id: Int = 1
+        for d in arreglo{
+            let newchild = context?.child("contactos").childByAutoId()
+            newchild?.child("nombre").setValue(d.nombre)
+            newchild?.child("edad").setValue(d.edad)
+            newchild?.child("genero").setValue(d.genero)
+            newchild?.child("foto").setValue(d.foto)
+//            context?.child("contactos").child("contacto \(id)").child("nombre").setValue(d.nombre)
+//            context?.child("contactos").child("contacto \(id)").child("edad").setValue(d.edad)
+//            context?.child("contactos").child("contacto \(id)").child("genero").setValue(d.genero)
+//            context?.child("contactos").child("contacto \(id)").child("foto").setValue(d.foto)
+//            id = id + 1
+        }
         
     }
     
@@ -90,12 +108,12 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         vista.Izquierda.text = arreglo[indexPath.row].nombre
         vista.Derecha.text = "\(arreglo[indexPath.row].edad)"
         //vista.imgView.image = UIImage (named: "dog" )
-       // let idfacebook = FBSDKAccessToken.current().userID
+        // let idfacebook = FBSDKAccessToken.current().userID
         //let url =  "http://graph.facebook.com/\(idfacebook!)/picture?type=large"
         
         if (arreglo[indexPath.row].genero == "m")
         {
-            vista.imgView.image = UIImage (named: "female" )            
+            vista.imgView.image = UIImage (named: "female" )
         }
         else
         {
@@ -103,18 +121,18 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         }
         vista.imgView.DownLoadData(url: arreglo[indexPath.row].foto)
         
-//        let dato : Data?
-//        
-//        do{
-//            dato = try Data(contentsOf: URL(string: url)!)
-//            vista.imgView.image = UIImage(data: dato!)
-//        }
-//        catch{
-//            print("error cargando imagen")
-//            dato = nil
-//            vista.imgView.image = UIImage (named: "dog" )
-//            
-//        }
+        //        let dato : Data?
+        //
+        //        do{
+        //            dato = try Data(contentsOf: URL(string: url)!)
+        //            vista.imgView.image = UIImage(data: dato!)
+        //        }
+        //        catch{
+        //            print("error cargando imagen")
+        //            dato = nil
+        //            vista.imgView.image = UIImage (named: "dog" )
+        //
+        //        }
         return vista
     }
     
@@ -173,9 +191,9 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
         
         let url = URL(string: "http://kke.mx/demo/contactos.php")
         
-//        var request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 1000)
-//        
-//        request.httpMethod = "GET"
+        //        var request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 1000)
+        //
+        //        request.httpMethod = "GET"
         
         var request = URLRequest(url: url!, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 1000)
         
@@ -229,17 +247,35 @@ class ViewController: UIViewController, UITableViewDataSource , UITableViewDeleg
                 let genero = d["genero"] as! String
                 let foto = d["foto"] as! String
                 self.arreglo.append((nombre: nombre, edad: edad, genero: genero, foto: foto))
+                
             }
             self.tblDatos.reloadData()
-        
+            
         })
         task.resume()
+    }
+    
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.context?.child("contactos").child("contacto 1").child("nombre").observe(.value, with: {
+            (snap: FIRDataSnapshot) in
+            print("Dato: \(snap)")
+            let nombre = snap.value!
+            self.lblImagen.text = "\(nombre)"
+        })
+//        self.context?.child("contactos").observe(.childChanged, with: {
+//            ( snap: FIRDataSnapshot) in
+//            print("Dato: \(snap)")
+//            let nombre = snap.children.value(forKey: "nombre")
+//            self.lblImagen.text = "\(nombre)"
+//        })
     }
     
 }
 
 class clase{
     var numero = 1
-        
+    
 }
 
