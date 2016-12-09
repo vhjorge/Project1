@@ -148,6 +148,15 @@
                     </view>
                     <navigationItem key="navigationItem" title="Inicio" prompt="IOS" id="034-pZ-ek3">
                         <barButtonItem key="backBarButtonItem" title="Regresar" id="mMJ-rM-Lv3"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="r5L-4J-ETI">
+                            <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="Fip-aF-Soh">
+                                <rect key="frame" x="16" y="37" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="GcU-uw-cWN">
                                 <connections>
@@ -165,6 +174,7 @@
                         <outlet property="imgView" destination="GCd-4v-2hL" id="bbn-Kw-cja"/>
                         <outlet property="lblImagen" destination="aKE-UD-J1s" id="u7v-pe-Y3m"/>
                         <outlet property="tblDatos" destination="E5X-dc-CmA" id="hQl-kZ-635"/>
+                        <outlet property="txtBuscar" destination="r5L-4J-ETI" id="3Be-nf-iar"/>
                         <segue destination="gYu-N3-V2z" kind="show" identifier="DetalleSegue" id="JjN-Lb-ChX"/>
                         <segue destination="9Cc-2H-Ylq" kind="show" identifier="AgregarSegue" id="74Y-zb-fCP"/>
                     </connections>

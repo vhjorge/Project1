@@ -30,6 +30,8 @@ extension Int{
     }
 }
 
+let x = nil ?? 6
+
 
 5.Cuadrado()
 9.Cuadrado()

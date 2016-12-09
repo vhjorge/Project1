@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14329CBE1DFB068C00D2FE7C /* Modelo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14329CBC1DFB068C00D2FE7C /* Modelo.xcdatamodeld */; };
+		14329CC01DFB06EE00D2FE7C /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14329CBF1DFB06EE00D2FE7C /* Persona.swift */; };
 		14819B2E1DF898AF00D983B1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14819B2D1DF898AF00D983B1 /* LoginViewController.swift */; };
 		14819B311DF8B69200D983B1 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14819B301DF8B69200D983B1 /* UIImageViewExtension.swift */; };
 		148479EC1DF5FF4300DF03F5 /* FilaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148479EB1DF5FF4300DF03F5 /* FilaTableViewCell.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14329CBD1DFB068C00D2FE7C /* Modelo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Modelo.xcdatamodel; sourceTree = "<group>"; };
+		14329CBF1DFB06EE00D2FE7C /* Persona.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
 		14819B2D1DF898AF00D983B1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		14819B2F1DF8AB7900D983B1 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ../MyPlayground.playground; sourceTree = "<group>"; };
 		14819B301DF8B69200D983B1 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -53,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14329CC11DFB088A00D2FE7C /* Modelo */ = {
+			isa = PBXGroup;
+			children = (
+				14329CBF1DFB06EE00D2FE7C /* Persona.swift */,
+			);
+			name = Modelo;
+			sourceTree = "<group>";
+		};
 		14FB77F01DF5F479007C20CE = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +86,7 @@
 		14FB77FB1DF5F47A007C20CE /* AppDemo */ = {
 			isa = PBXGroup;
 			children = (
+				14329CC11DFB088A00D2FE7C /* Modelo */,
 				14819B2F1DF8AB7900D983B1 /* MyPlayground.playground */,
 				148479EB1DF5FF4300DF03F5 /* FilaTableViewCell.swift */,
 				14FB77FC1DF5F47A007C20CE /* AppDelegate.swift */,
@@ -87,6 +100,7 @@
 				14819B2D1DF898AF00D983B1 /* LoginViewController.swift */,
 				14819B301DF8B69200D983B1 /* UIImageViewExtension.swift */,
 				14C6D2BD1DF9EA2400FECC99 /* GoogleService-Info.plist */,
+				14329CBC1DFB068C00D2FE7C /* Modelo.xcdatamodeld */,
 			);
 			path = AppDemo;
 			sourceTree = "<group>";
@@ -235,6 +249,8 @@
 				14819B2E1DF898AF00D983B1 /* LoginViewController.swift in Sources */,
 				14819B311DF8B69200D983B1 /* UIImageViewExtension.swift in Sources */,
 				14EE9F9B1DF71C6200DE0477 /* DetalleViewController.swift in Sources */,
+				14329CC01DFB06EE00D2FE7C /* Persona.swift in Sources */,
+				14329CBE1DFB068C00D2FE7C /* Modelo.xcdatamodeld in Sources */,
 				14FB77FF1DF5F47A007C20CE /* ViewController.swift in Sources */,
 				14FB77FD1DF5F47A007C20CE /* AppDelegate.swift in Sources */,
 				148479EC1DF5FF4300DF03F5 /* FilaTableViewCell.swift in Sources */,
@@ -405,6 +421,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		14329CBC1DFB068C00D2FE7C /* Modelo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				14329CBD1DFB068C00D2FE7C /* Modelo.xcdatamodel */,
+			);
+			currentVersion = 14329CBD1DFB068C00D2FE7C /* Modelo.xcdatamodel */;
+			path = Modelo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 14FB77F11DF5F479007C20CE /* Project object */;
 }
